@@ -1,0 +1,133 @@
+# JS-
+阶段三
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+</body>
+</html>
+<script>
+function $C(tag,father_node,css){
+	var node=document.createElement(tag||'div');
+	if(father_node)
+	{
+	$A(father_node,node);
+	}
+	if(css){
+	$S(node,css);
+	}
+	return node;
+}
+
+function $A(father_node,child_node){
+	father_node.appendChild(child_node);
+}
+
+function $S(node,css){
+	for(var i in css)
+	{
+		if(i=='src'||i=='title'||i=='id'){
+		node[i]==css[i];}
+		else
+		node.style[i]=css[i];
+	}
+}
+
+function $I(node,str){
+	node.innerHTML=str;
+}
+
+var mydiv=$C('div',document.body,{
+		color:'red'	
+		,border:'1px solid yellow'
+		});
+$I(mydiv,'hello app');
+var mydiv2=$C('div',document.body,{
+		position:'absolute'
+		,top:'100px'
+		,left:'100px'
+		,height:'500px'
+		,width:'500px'
+		,backgroundColor:'gray'
+		,textAlign:"center"
+		,lineHeight:'80px'
+		,fontFamily:'楷书'
+		,fontSize:'60px'
+		});
+var mydiv22=$C('div',document.body,{
+		position:'absolute'
+		,top:'100px'
+		,left:'100px'
+		,height:'400px'
+		,width:'400px'
+		,backgroundColor:'yellow'
+		,textAlign:"center"
+		,lineHeight:'80px'
+		,fontFamily:'楷书'
+		,fontSize:'60px'
+		});
+$I(mydiv2,'点击一下');
+//document.body.appendChild(mydiv);
+//mydiv.style.color='red';
+//mydiv.innerHTML='hello app';
+var div3=$C('input',mydiv,'');
+div3.type='text';
+div3.value='haha';
+//事件
+mydiv2.onclick=function(){
+	$S(mydiv2,{
+	top:parseInt(mydiv2.style.top)-5,
+	left:parseInt(mydiv2.style.left)-5,
+	fontFamily:'隶书'
+	});
+	};
+mydiv.onclick=function(){
+	$I(mydiv2,'haha');
+};
+mydiv2.onmouseover=moveLeft;
+mydiv2.onmousemove=function(){
+	moveRight();
+};
+mydiv2.onmousedown=function(){
+	moveLeft();
+};
+mydiv2.onmouseout=moveRight;
+function moveLeft(){
+	move(-18,-18);
+}
+function moveRight(){
+	move(18,18);
+}
+function move(x,y){
+	$S(mydiv2,{
+	top:parseInt(mydiv2.style.top)+x,
+	left:parseInt(mydiv2.style.left)+y
+	});
+}
+var down_1i;
+function strg(node){
+	node.onmousedown=function (){
+		down_1i=1;
+	}
+	node.onmousemove=function (e){
+		e=e||event;//缺省值的写法
+		if(down_1i==1)
+		{
+			document.title=e.clientX+', '+e.clientY
+			//移动node
+			$S(node,{
+			top:e.clientY-parseInt(node.style.height)/2,
+			left:e.clientX-parseInt(node.style.width)/2
+			})
+		}
+	}
+	node.onmouseup=function (){
+		down_1i=0;
+}
+}
+strg(mydiv2);
+strg(mydiv22);
+
+
+</script>
