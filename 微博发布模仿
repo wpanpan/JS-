@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style>
+	* {margin:0;padding:0;}
+	ul {list-style:none;}
+		.box {
+			width: 350px;
+			font-size: 14px;
+			margin:30px auto;
+			padding:10px 20px;
+			border: 1px solid #ccc;
+		}
+		#txt {
+			resize:none;
+		}
+		.box ul li {
+			border-bottom: 1px dashed #ddd;
+			height:20px;
+			width:350px;
+			line-height: 20px;
+		}
+		.box ul li a {
+			text-decoration: none;
+			color:#000;
+			float:right;
+			cursor:pointer;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="box">
+		<p>微博发布</p>
+		<textarea name="" id="txt" cols="40" rows="10"></textarea>
+		<button id="btn">发布</button>
+		
+	</div>
+</body>
+</html>
+<script>
+	function $(id){return document.getElementById(id);}
+	var ul=document.createElement("ul");
+	$("btn").parentNode.appendChild(ul);
+	$("btn").onclick= function (){
+		if($("txt").value==""){
+			alert("请输入内容！");
+			return false;
+		}
+		else{
+			var newLi=document.createElement("li");
+			var link=document.createElement("a");
+			var len=ul.children;
+			if(len.length==0){
+				ul.appendChild(newLi);
+				create();
+			}
+			else
+			{
+			ul.insertBefore(newLi,len[0]);
+			create();
+			}
+			function create(){
+				newLi.innerHTML=$("txt").value;
+				$("txt").value="";
+				newLi.appendChild(link);
+				link.innerHTML="删除";
+			    link.onclick=function() {
+				ul.removeChild(this.parentNode);
+				}
+			}
+		}
+	}
+</script>
