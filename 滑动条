@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	.scroll {
+		width:500px;
+		height:26px;
+		background: #eee;
+		position:relative;
+		margin:100px auto;
+	}
+	.bar {
+		width:15px;
+		height:40px;
+		background: blue;
+		cursor:pointer;
+		position:absolute;
+		top:-7px;
+		left:0;
+	}
+	.mask {
+		height:26px;
+		position:absolute;
+		top:0;
+		left:0;
+		background: #e4c;
+	}
+</style>
+<body>
+	<div class="scroll" id="scroll">
+		<div class="bar">
+		</div>
+		<div class="mask"></div>
+	</div>
+</body>
+</html>
+<script>
+	var scroll=document.getElementById("scroll");
+	var bar=scroll.children[0];
+	var mask=scroll.children[1];
+	bar.onmousedown=function(event){
+		var event=event || window.event;
+		var lastleft=event.clientX-this.offsetLeft;
+		var that=this;
+		document.onmousemove=function(event){
+			var event=event || window.event;
+			that.style.left=event.clientX-lastleft+"px";
+			if(parseInt(that.style.left)<0){
+				that.style.left="0px";
+			}
+			if(parseInt(that.style.left)>500){
+				that.style.left="500px";
+			}
+			mask.style.width=that.style.left;
+		}
+		window.getSelection ? window.getSelection().removeAllRanges() :document.selection.empty();//清除选中内容
+	}
+	document.onmouseup=function() {
+		document.onmousemove=null;
+	}
+</script>
