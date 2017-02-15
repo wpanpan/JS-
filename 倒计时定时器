@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#demo {
+			height:40px;
+			width:500px;
+			margin:100px auto;
+			text-align: cenetr;
+			line-height: 40px;
+			color:red;
+			font-size: 30px;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			
+			var demo=document.getElementById("demo");
+			var endTime=new Date("2017/02/26 09:00:00");
+			setInterval(fn,1000);
+			function fn(){
+				var date=new Date();
+				var nowTime=date.getTime();
+				var second=parseInt((endTime.getTime()-nowTime)/1000);
+				var day=parseInt(second/3600/24);
+				var hour=parseInt(second/3600%24);
+				var minute=parseInt(second/60%60);
+				var sec=parseInt(second%60);
+				day<10 ? day= "0"+day : day;
+				hour<10 ? hour= "0"+hour : hour;
+				minute<10 ? minute= "0"+minute : minute;
+				sec<10 ? sec= "0"+sec : sec;
+				demo.innerHTML="距离开学还有:"+day+"天"+hour+"小时"+minute+"分钟"+sec+"秒";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="demo"></div>
+</body>
+</html>
