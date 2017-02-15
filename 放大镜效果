@@ -98,10 +98,7 @@
          }
          mask.style.left = x + "px";
          mask.style.top = y + "px";
-         /*计算  ：  夫子 一顿吃 2个馒头    娇子  一顿 4个馒头
-         问  夫子今天吃了 3个馒头  娇子应该吃几个？  */
-         /*计算出他们的倍数   4 / 2    2倍
-          3 * 2  == 6个  */
+        
          /* 大图盒子 /  小图盒子  倍数
           我们 再小图移动的距离 *  倍数  ==  大图的位置*/
          bigImage.style.left =  -x *  big.offsetWidth /small.offsetWidth + "px";
