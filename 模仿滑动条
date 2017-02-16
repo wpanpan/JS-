@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.box {
+			width:200px;
+			height:500px;
+			border: 1px solid red;
+			margin:100px;
+			position:relative;
+			overflow:hidden;
+		}	
+		.current {
+			height:auto;
+			padding:5px 15px 5px 5px;
+			position:absolute;
+			top:0;
+			left:0;
+		}
+		.line {
+			width:15px;
+			height:100%;
+			position:absolute;
+			top:0;
+			right:0;
+			background: #ccc;
+		}
+		.bar {
+			background: red;
+			width:100%;
+			border-radius: 5px;
+			cursor:pointer;
+			position:absolute;
+			top:0;
+			left:0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box" id="box">
+		<div class="current">
+			内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰容丰富多彩内容丰富多彩内容丰容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩内容丰富多彩
+		</div>
+		<div class="line">
+			<div class="bar"></div>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+	var box=document.getElementById("box");
+	var current=box.children[0];
+	var line=box.children[1];
+	var bar=line.children[0];
+	var barheight=box.offsetHeight*line.offsetHeight/current.offsetHeight;
+	bar.style.height=barheight+"px";
+	move(bar,current);
+	function move(obj,target){
+		obj.onmousedown=function(event){
+			var event=event||window.event;
+			var x=event.clientY-this.offsetTop;
+			var that=this;
+		document.onmousemove=function(event){
+			var event=event||window.event;
+			var barTop=event.clientY-x;
+			var contentTop=(current.offsetHeight-box.offsetHeight)/
+			(box.offsetHeight-bar.offsetHeight)*barTop;
+			if(barTop<0)
+			{
+				barTop=0;
+			}
+			else if(barTop>box.offsetHeight-that.offsetHeight){
+				barTop=box.offsetHeight-that.offsetHeight;
+			}
+			else {
+				current.style.top=-contentTop+"px";
+			}
+			that.style.top=barTop+"px";
+			window.getSelection ? window.getSelection().removeAllRanges() :document.selection.empty();
+		}
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null;
+		}
+
+	}
+</script>
